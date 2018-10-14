@@ -1,28 +1,55 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import BreweryList from './BreweryList.js'
+import Api from './Api.js'
+import Header from './Header.js'
+import Discover from './Discover.js'
+import Wishlist from './Wishlist.js'
+import Visited from './Visited.js'
+import Brewery from './Brewery.js'
+
+import { Route, Switch } from "react-router-dom"
 
 class App extends Component {
+  state = {
+    breweries: [],
+  }
+
+  componentDidMount () {
+    fetch("https://api.openbrewerydb.org/breweries/")
+    .then(res => res.json())
+    .then(
+      (results) => {
+        this.setState({
+          breweries: results
+        });
+      },
+
+      (error) => {
+        this.setState({
+          isLoaded: true,
+          error
+        });
+      }
+    )
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Switch>
+        <Route
+          exact path = "/"
+          render={(props) => <BreweryList {...props} breweries={this.state.breweries} />}/>
+        <Route
+          path="/wishlist"
+          component={Wishlist} />
+        <Route 
+          path="/visited"
+          component={Visited} />
+      </Switch>      
     );
   }
-}
+} 
 
 export default App;
+
