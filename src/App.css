@@ -1,19 +1,99 @@
-.App {
-  text-align: center;
+/*====================
+page style
+====================*/
+*{
+    max-width: 95%;
+    margin: auto;
+}
+HTML{
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+body{
+    background: whitesmoke;
+    align-content: center;
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, Serif;
+    max-width: 2000px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.brewery,
+.breweryList,
+.nav,
+.link{
+    list-style-type: none;
+    padding: 0;
 }
 
-.App-link {
-  color: #61dafb;
+/*====================
+header
+====================*/
+.title{
+    text-align: center;
+    font-size: 2em;
+    padding: .5em;
+    margin: auto;
+    border-radius: 10%;
+}
+
+.nav{
+    padding: 5px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    max-width: 400px;
+    border-radius: 10%;
+}
+
+.link{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 10%;
+}
+
+/*====================
+search feature
+====================*/
+.form{
+    padding: 5px;
+    margin-bottom: 1.5em;
+    text-align: center;
+    display: block;
+    padding: 1em;
+}
+
+/*====================
+brewery listings
+====================*/
+.breweryList{
+    -webkit-columns: 4 150px;
+    -moz-columns: 4 150px;
+    columns: 4 150px;
+    -webkit-column-gap: 2em;
+    -moz-column-gap: 2em;
+    column-gap: 2em;
+}
+
+.brewery{
+    margin-bottom: 1.3em;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/*====================
+media queries
+====================*/
+@media (min-width: 503px ) {
+    .nav{
+        display: flex;
+        justify-content: space-around;
+        padding: 5px;
+        flex-wrap: wrap;
+    }
 }
 

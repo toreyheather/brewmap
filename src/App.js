@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import BreweryList from './BreweryList.js'
-import Api from './Api.js'
 import Header from './Header.js'
+import Api from './Api.js'
+import SearchForm from './SearchForm'
+import BreweryList from './BreweryList.js'
 import Wishlist from './Wishlist.js'
 import Visited from './Visited.js'
-import Brewery from './Brewery.js'
-import BrewBox from './BrewBox.js'
-import SearchForm from './SearchForm'
+
 
 import { Route, Switch } from "react-router-dom"
 
-class App extends Component {
+
+class App extends Component { 
   state = {
-    breweries: [],
+    isFilteredWishlist: true,
+    isFilteredVisited: true,
+    breweries: []
   }
  
   componentDidMount () {
@@ -38,32 +40,84 @@ performSearch = (query) => {
     )
 }
 
+  toggleWishlistAt = indexToChange => 
+    this.setState({
+      breweries: this.state.breweries.map((brewery, index) => {
+        if (index === indexToChange){
+          return {
+            ...brewery,
+            wishlist: !brewery.wishlist
+          };
+        }
+        return brewery;
+      })
+    });
+
+  toggleVisitedAt = indexToChange => 
+    this.setState({
+      breweries: this.state.breweries.map((brewery, index) => {
+        if (index === indexToChange){
+          return {
+            ...brewery,
+            visited: !brewery.visited
+          };
+        }
+        return brewery;
+      })
+    });    
+
+  toggleFilterWishlist = () =>
+      this.setState({ isFilteredWishlist: !this.state.isFilteredWishlist});
+
+  toggleFilterVisited = () =>
+      this.setState({ isFilteredVisited: !this.state.isFilteredVisited});
+
+
   render() {
     return (
-      <div>
-        <div className='header'>
-          <div className='inner'>
-            <h1 className='mainTitle'>BrewMap</h1>
-            <SearchForm onSearch={this.performSearch} />
-          </div>
-        </div>
-        <div className="mainContent">
-          <Switch>
-            <Route
-              exact path = "/"
-              render={(props) => <BreweryList {...props} breweries={this.state.breweries} />}/>
-            <Route
-              path="/wishlist"
-              component={Wishlist} />
-            <Route 
-              path="/visited"
-              component={Visited} />
-          </Switch> 
-        </div>   
-     </div>       
+      <div className="mainContent">
+        <Header/>
+        <Switch>
+          <Route
+            exact path = "/"
+            render={(props) =>
+              <div>
+                <SearchForm 
+                  onSearch={this.performSearch} 
+                /> 
+                <BreweryList {...props} 
+                  breweries={this.state.breweries} 
+                  toggleWishlistAt={this.toggleWishlistAt}
+                  toggleVisitedAt={this.toggleVisitedAt}
+                  isFilteredWishlist={this.state.isFilteredWishlist}
+                  isFilteredVisited={this.state.isFilteredVisited} 
+                />
+              </div>}
+          />
+          <Route
+            path="/wishlist"
+            render={(props) => 
+              <Wishlist {...props} 
+                breweries={this.state.breweries} 
+                toggleWishlistAt={this.toggleWishlistAt}
+                isFilteredWishlist={this.state.isFilteredWishlist} 
+              />} 
+            /> 
+          <Route 
+            path="/visited"
+            render={(props) => 
+              <Visited {...props} 
+                breweries={this.state.breweries} 
+                toggleVisitedAt={this.toggleVisitedAt}
+                isFilteredVisited={this.state.isFilteredVisited} 
+              />} 
+          />  
+        </Switch> 
+      </div>          
     );
-  }
+  } 
 } 
+
 
 export default App;
 
