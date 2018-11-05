@@ -7,13 +7,10 @@ class BreweryList extends Component {
    return(
      <ul className="breweryList">
        {this.props.breweries.map((brewery, index) => 
-        <Brewery 
-          key={brewery.id} 
-          brewery={brewery}
-          wishlist={brewery.wishlist}
-          visited={brewery.visited}
-          handleWishlist= {() => this.props.toggleWishlistAt(index)}
-          handleVisited= {() => this.props.toggleVisitedAt(index)} />
+          <Brewery 
+            key={brewery.id} 
+            brewery={brewery} 
+          />
         )}
      </ul>
    );
@@ -22,8 +19,7 @@ class BreweryList extends Component {
 
 Brewery.propTypes = {
  brewery: PropTypes.object.isRequired,
- toggleWishlistAt: PropTypes.func.isRequired,
- toggleVisitedAt: PropTypes.func.isRequired
+ 
 }
 
 export default BreweryList;

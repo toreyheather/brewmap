@@ -1,8 +1,10 @@
-
+import firebase from './Config.js'
+import Brewery from './Brewery.js'
 
 export default {
-  getBreweries(query = "40206"){
+  getBreweries(query = "otherhalf"){
     return fetch (`https://api.openbrewerydb.org/breweries/search?query=${query}`)
       .then(res =>res.json());
   }
 }
+
