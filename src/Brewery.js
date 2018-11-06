@@ -2,39 +2,47 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types"
 
 class Brewery extends Component {  
-  
-  wishlistAdd(){
+ 
+  //sends data to firebase wishlist api when button is clicked
+  wishlistAdd = () => {  
+    const wishlistData = {
+      method: "POST",
+      body: JSON.stringify({
+        id: this.props.brewery.id,
+        name: this.props.brewery.name,
+        street: this.props.brewery.street,
+        city: this.props.brewery.city,
+        state: this.props.brewery.state,
+        postal_code: this.props.brewery.postal_code,
+      })
+    };
+
     const wishlistBrewery = fetch(
-      "https://brewmap-d8faf.firebaseio.com/wishlist.json",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          name: "{this.props.brewery.name}",
-          street: "{this.props.brewery.street}",
-          city: "{this.props.brewery.city}",
-          state: "{this.props.brewery.state}",
-          postal_code: "{this.props.brewery.postal_code}",
-        }),
-      },
-    ).then(r => r.json());
+      "https://brewmap-d8faf.firebaseio.com/wishlist.json", wishlistData)
+      .then(r => r.json());
   }
 
-  visitedAdd(){
+  
+  //sends data to firebase visited api when button is clicked
+  visitedAdd = () => {  
+    const visitedData = {
+      method: "POST",
+      body: JSON.stringify({
+        id: this.props.brewery.id,
+        name: this.props.brewery.name,
+        street: this.props.brewery.street,
+        city: this.props.brewery.city,
+        state: this.props.brewery.state,
+        postal_code: this.props.brewery.postal_code,
+      })
+    };
+
     const visitedBrewery = fetch(
-      "https://brewmap-d8faf.firebaseio.com/visited.json",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          name: "{this.props.brewery.name}",
-          street: "{this.props.brewery.street}",
-          city: "{this.props.brewery.city}",
-          state: "{this.props.brewery.state}",
-          postal_code: "{this.props.brewery.postal_code}",
-        }),
-      },
-    ).then(r => r.json());
+      "https://brewmap-d8faf.firebaseio.com/visited.json", visitedData)
+      .then(r => r.json());
   }
 
+  //returns individual breweries from the search form with two buttons
   render() {
     return(
       <li className="brewery">

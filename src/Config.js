@@ -1,5 +1,6 @@
   import firebase from 'firebase';
   
+  //makes firebase work with this app
   var config = {
     apiKey: "AIzaSyBsOWPhYLru1Tx_nzd1yvp0Zmwye1XeXlg",
     authDomain: "brewmap-d8faf.firebaseapp.com",

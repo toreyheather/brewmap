@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-
+//pulls data from the firebase visited api
 class Visited extends Component {
   
   render() {

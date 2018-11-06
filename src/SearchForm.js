@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+//creates the seach feature to search the open brewery database
 class SearchForm extends Component {
 
   state= {

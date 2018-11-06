@@ -63,13 +63,13 @@ performSearch = (query) => {
             path="/wishlist"
             render={(props) => 
             <Wishlist {...props}
+              breweriesWishlist={this.state.breweriesWishlist}
             /> } 
           />
           <Route 
             path="/visited"
             render={(props) => 
             <Visited {...props}
-              breweries={this.state.breweries}
             />}  
           />  
         </Switch> 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from "prop-types"
 import Brewery from "./Brewery"
 
+//creates a list of the individual breweries from the brewery component
 class BreweryList extends Component {
  render() {
    return(

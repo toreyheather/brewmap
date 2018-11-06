@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {NavLink} from 'react-router-dom';
 
-
+//creates the header of the app
 class Header extends Component {
   render() {
     return (
