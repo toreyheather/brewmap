@@ -22,7 +22,6 @@ class Brewery extends Component {
       .then(r => r.json());
   }
 
-  
   //sends data to firebase visited api when button is clicked
   visitedAdd = () => {  
     const visitedData = {

@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types"
 
 //pulls data from the firebase wishlist api
-
-
-
-
 class Wishlist extends Component {
   
   state = {
-    breweriesWishlist: []
+    wishlistDelete: []
   }
 
   async componentDidMount() {
@@ -19,10 +14,10 @@ class Wishlist extends Component {
     
     const wishlistArr = Object.entries(wishlistBreweries)
       .map(([id, attrs]) => 
-      ({id, ...attrs,}));  console.log(wishlistArr);
+      ({id, ...attrs,}));  
 
     this.setState({
-      breweriesWishlist: wishlistArr
+      wishlistDelete: wishlistArr
     }); 
   }
 
@@ -30,14 +25,15 @@ class Wishlist extends Component {
       return (
         <div>
           <h3>Wishlist: list of places I would like to try </h3><br/>
-          <ul className = "breweryList">{this.state.breweriesWishlist.map((item) => 
-            <li className="brewery">
+          <ul className = "breweryList">{this.state.wishlistDelete.map((item, id) => 
+            <li key={item.id} className="brewery">
               {item.name} <br/>
               {item.street} <br/>
               {item.city}, {item.state} {item.postal_code}<br/>
+              
               <button 
                 className="deleteButton"
-                onClick={this.wishlistDelete}
+                onClick={item.wishlistDelete}
               > Delete from Wishlist </button><br/>
               <br/>
             </li>)}
@@ -46,8 +42,5 @@ class Wishlist extends Component {
       );
     }
   }
-
-  
-  
 
   export default Wishlist;
