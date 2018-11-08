@@ -1,3 +1,14 @@
+My Code Louisville JavaScript/React project is a web app that allows users create a list of breweries they would like to visit along with a list of breweries they have already visited. 
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
