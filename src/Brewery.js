@@ -41,7 +41,7 @@ class Brewery extends Component {
       .then(r => r.json());
   }
 
-  //returns individual breweries from the search form with two buttons
+  //returns individual breweries from the search form with two buttons to add to wishlist and visited
   render() {
     return(
       <li className="brewery">

@@ -24,6 +24,7 @@ class App extends Component {
    this.performSearch();
   }
 
+//performs search from search form   
 performSearch = (query) => {
   Api.getBreweries(query)
     .then(
@@ -42,6 +43,7 @@ performSearch = (query) => {
     )
 }
 
+//displays content on webpage
   render() {
     return (
       <div className="mainContent">
