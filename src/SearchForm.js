@@ -20,7 +20,7 @@ class SearchForm extends Component {
   render() {
     return (
       <form className="form" onSubmit={this.handleSubmit}>
-        <label htmlFor="search">Search:  </label>
+        <label htmlFor="search">Search for a brewery by name or location.  </label><br/><br/>
         <input type="search"
             onChange={this.onSearchChange}
             name="search"

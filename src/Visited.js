@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 
-//pulls data from the firebase visited api
+//pulls and deletes data from the firebase visited api
 class Visited extends Component {
   
   state = {
-    breweriesVisited: []
+    visitedBreweries: []
   }
 
   async componentDidMount() {
+    await this.getBreweries();
+  }
+
+  deleteBrewery = async (itemId) => {
+    await fetch(
+      `https://brewmap-d8faf.firebaseio.com/visited/${itemId}.json`,
+      {
+        method: "DELETE",
+      }
+    );
+    await this.getBreweries();
+  }
+
+  getBreweries = async () => {
     const visitedBreweries = await fetch(
       "https://brewmap-d8faf.firebaseio.com/visited.json"
     ).then(r => r.json());
     
     const visitedArr = Object.entries(visitedBreweries)
       .map(([id, attrs]) => 
-      ({id, ...attrs,}));  
+      ({...attrs, id}));  
 
     this.setState({
-      breweriesVisited: visitedArr
+      visitedBreweries: visitedArr
     }); 
   }
 
@@ -25,7 +39,7 @@ class Visited extends Component {
     return (
       <div>
         <h3>Visited: places I have been to </h3><br/>
-        <ul className = "breweryList">{this.state.breweriesVisited.map((item) => 
+        <ul className = "breweryList">{this.state.visitedBreweries.map((item) => 
           <li key={item.id} className="brewery">
             {item.name} <br/>
             {item.street} <br/>
@@ -33,7 +47,7 @@ class Visited extends Component {
             
             <button 
               className="deleteButton"
-              onClick={item.visitedDelete}
+              onClick={() => this.deleteBrewery(item.id)}
             > Delete from Visited </button><br/>
             <br/>
           </li>)}

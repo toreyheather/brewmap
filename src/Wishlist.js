@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 
-//pulls data from the firebase wishlist api
+//pulls and deletes data from the firebase wishlist api 
 class Wishlist extends Component {
   
   state = {
-    wishlistDelete: []
+    wishlistBreweries: []
   }
 
   async componentDidMount() {
+   await this.getBreweries();
+  }
+
+  deleteBrewery = async (itemId) => {
+    await fetch(
+      `https://brewmap-d8faf.firebaseio.com/wishlist/${itemId}.json`,
+      {
+        method: "DELETE",
+      }
+    );
+    await this.getBreweries();
+  }
+
+  getBreweries = async () => {
     const wishlistBreweries = await fetch(
       "https://brewmap-d8faf.firebaseio.com/wishlist.json"
     ).then(r => r.json());
     
     const wishlistArr = Object.entries(wishlistBreweries)
       .map(([id, attrs]) => 
-      ({id, ...attrs,}));  
+      ({ ...attrs, id}));  
 
     this.setState({
-      wishlistDelete: wishlistArr
+      wishlistBreweries: wishlistArr
     }); 
   }
 
@@ -25,7 +39,7 @@ class Wishlist extends Component {
       return (
         <div>
           <h3>Wishlist: list of places I would like to try </h3><br/>
-          <ul className = "breweryList">{this.state.wishlistDelete.map((item, id) => 
+          <ul className = "breweryList">{this.state.wishlistBreweries.map((item, id) => 
             <li key={item.id} className="brewery">
               {item.name} <br/>
               {item.street} <br/>
@@ -33,7 +47,7 @@ class Wishlist extends Component {
               
               <button 
                 className="deleteButton"
-                onClick={item.wishlistDelete}
+                onClick={() => this.deleteBrewery(item.id)}
               > Delete from Wishlist </button><br/>
               <br/>
             </li>)}
